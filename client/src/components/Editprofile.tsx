@@ -182,7 +182,7 @@ function EditProfile() {
     console.log(userData);
 
     if (validate()) {
-      fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/editProfile/${formData.username}`, {
+      fetch(`${process.env.VITE_BACKEND_URL}/api/user/editProfile/${formData.username}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -243,7 +243,7 @@ function EditProfile() {
               id="username"
               name="username"
               value={formData.username}
-             // onChange={handleChange}
+              // onChange={handleChange}
               className="w-full p-2 border-2 border-black  bg-white   text-black  rounded-xl"
             />
             {errors.fullName && <p className="text-red-500">{errors.fullName}</p>}

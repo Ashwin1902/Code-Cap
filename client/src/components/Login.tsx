@@ -146,13 +146,12 @@ const LoginForm: React.FC = () => {
                 {errors.Password && <p className="text-red-500 text-sm">{errors.Password}</p>}
               </div>
               <button
-  type="submit"
-  disabled={isLoading}
-  className="w-full  md:mx-auto lg:mx-auto px-4 py-3 text-white bg-black rounded-full focus:bg-indigo-600 focus:outline-none disabled:opacity-50"
->
-  {isLoading ? 'Logging in...' : 'Login'}
-</button>
-
+                type="submit"
+                disabled={isLoading}
+                className="w-full md:w-1/2 md:mx-auto px-4 py-3 text-white bg-black rounded-full focus:bg-indigo-600 focus:outline-none disabled:opacity-50"
+              >
+                {isLoading ? 'Logging in...' : 'Login'}
+              </button>
             </div>
             <p className="mt-4 text-lg text-center text-gray-400">
               Not registered? <a href="/register" className="text-blue-500 bg-white p-2 rounded-xl border border-gray-500 focus:underline">Register</a>

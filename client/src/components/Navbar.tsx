@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {logout} from '../auth/auth'
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button } from '@mui/material';
 import { useToast } from './ui/use-toast';
 import { AvatarFallback, AvatarImage, Avatar } from './ui/avatar';
 import { useNavigate } from 'react-router-dom';
+import { logout } from '../auth/auth';
 
 interface FormData {
   github: string;
@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
 
   function getCookieValue(name: string) {
     const cookies = document.cookie.split('; ');
-    for (let cookie of cookies) {
+    for (const cookie of cookies) {
       const [cookieName, cookieValue] = cookie.split('=');
       if (cookieName === name) {
         return decodeURIComponent(cookieValue);
@@ -133,6 +133,7 @@ const Navbar: React.FC = () => {
                   onClick={(e) => {
                     e.preventDefault();
                     handleLogout();
+                    logout();
                   }}
                 >
                   Log Out
@@ -163,7 +164,6 @@ const Navbar: React.FC = () => {
               e.preventDefault();
               handleLogout();
               closeSidebar();
-              logout();
             }}
           >
             LOG OUT
