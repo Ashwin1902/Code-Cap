@@ -1,6 +1,7 @@
 
 import React from 'react';
-import Github from '@mui/icons-material/Github';
+import   GitHub from '@mui/icons-material/GitHub';
+
 
 interface ProfileProps {
   role: string;
@@ -20,7 +21,7 @@ const Profile2: React.FC<ProfileProps> = ({ role, branch, college, status,github
           <p className="text-lg md:text-xl ml-1 text-white">{role}</p>
           <div className="block ml-48 md:hidden">
           <a href={github} target="_blank" rel="noopener noreferrer" className="text-black-500">
-          <Github />
+          <GitHub />
         </a>
         </div>
         </div>
@@ -41,7 +42,7 @@ const Profile2: React.FC<ProfileProps> = ({ role, branch, college, status,github
       </div>
       <div className="hidden md:flex justify-center  items-center md:w-[10%]"> <div className="hidden md:flex justify-center items-center w-full md:w-[10%] h-[50px] md:h-full">
         <a href={github} target="_blank" rel="noopener noreferrer" className="text-black-500 ">
-          <Github />
+          <GitHub />
         </a>
       </div></div>
     </div>

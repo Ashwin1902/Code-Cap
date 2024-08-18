@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { LinkedIn, GitHub, Email } from '@mui/icons-material';
 import SupportUs from './SupportUs';
 
