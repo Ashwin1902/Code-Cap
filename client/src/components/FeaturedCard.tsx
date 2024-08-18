@@ -24,7 +24,7 @@ const Card: React.FC<CardProps> = ({ imageUrl, name, mode, date, teamSize, hackU
         </div>
         <div className="flex flex-col justify-between p-6 md:w-3/5">
           <div className="space-y-4">
-            <h2 className="text-3xl font-bold text-gray-100 font-serif">{name}</h2>
+            <h2 className="text-4xl font-bold text-gray-100 font-serif">{name}</h2>
             <div className="space-y-3 text-gray-100">
               <InfoItem label="Mode"  value={mode} />
               <InfoItem label="Last Date" value={date} />
@@ -33,7 +33,7 @@ const Card: React.FC<CardProps> = ({ imageUrl, name, mode, date, teamSize, hackU
           </div>
           <div className="mt-6">
             <a href={hackURL} target="_blank" rel="noopener noreferrer" title="Visit the hackathon website">
-              <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center">
+              <Button variant={'secondary'} className="w-full  bg-indigo-600 hover:bg-indigo-700 text-white text-lg py-2 font-mono font-semibold px-4 rounded-lg transition-colors duration-300 flex items-center justify-center">
                 Visit Website <ExternalLink className="ml-2 h-4 w-4" />
               </Button>
             </a>
@@ -46,8 +46,8 @@ const Card: React.FC<CardProps> = ({ imageUrl, name, mode, date, teamSize, hackU
 
 const InfoItem: React.FC<{ label: string; value: string }> = ({ label, value }) => (
   <div className="flex items-center text-sm">
-    <span className="font-semibold text-yellow-500 w-28 md:text-xl text-lg">{label}:</span>
-    <span className="text-gray-100 font-medium md:text-xl text-lg ">{value}</span>
+    <span className="font-semibold text-yellow-500 w-fit md:text-2xl font-serif text-lg">{label}:&nbsp;</span>
+    <span className="text-gray-100 font-medium md:text-2xl font-serif text-lg ">{value}</span>
   </div>
 );
 

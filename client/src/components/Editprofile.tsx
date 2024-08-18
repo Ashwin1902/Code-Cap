@@ -67,7 +67,7 @@ function EditProfile() {
 
   useEffect(() => {
     const username = getCookieValue('user');
-    fetch(`http://localhost:3018/api/user/getProfile/${username}`, {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/getProfile/${username}`, {
       credentials: 'include',
     })
       .then((response) => response.json())
@@ -182,7 +182,7 @@ function EditProfile() {
     console.log(userData);
 
     if (validate()) {
-      fetch(`http://localhost:3018/api/user/editProfile/${formData.username}`, {
+      fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/editProfile/${formData.username}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

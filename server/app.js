@@ -10,7 +10,7 @@ const eventRouter = require('./routes/eventRouter');
 
 
 app.use(cors({
-    origin: ' http://localhost:5173', // Replace with your frontend URL
+    origin: `${process.env.VITE_FRONTEND_URL}`, // Replace with your frontend URL
     methods: ['GET', 'POST'],
     credentials: true, // Allow credentials (cookies)
     allowedHeaders: ['Content-Type', 'Authorization'],

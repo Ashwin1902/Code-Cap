@@ -41,7 +41,7 @@ const LoginForm: React.FC = () => {
     if (!validate()) { return; }
 
     try {
-      const response = await fetch('http://localhost:3018/api/user/signIn', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/signIn`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

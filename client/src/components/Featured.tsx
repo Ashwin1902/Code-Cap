@@ -27,7 +27,7 @@ function Featured() {
   useEffect(() => {
     const fetchDefaultProfiles = async () => {
       try {
-        const response = await fetch("http://localhost:3018/api/events/getAllEvents", {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/events/getAllEvents`, {
           credentials: "include",
         });
         if (response.ok) {
