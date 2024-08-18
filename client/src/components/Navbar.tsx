@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import {logout} from '../auth/auth'
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button } from '@mui/material';
@@ -163,6 +163,7 @@ const Navbar: React.FC = () => {
               e.preventDefault();
               handleLogout();
               closeSidebar();
+              logout();
             }}
           >
             LOG OUT

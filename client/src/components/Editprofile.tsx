@@ -243,7 +243,7 @@ function EditProfile() {
               id="username"
               name="username"
               value={formData.username}
-              onChange={handleChange}
+             // onChange={handleChange}
               className="w-full p-2 border-2 border-black  bg-white   text-black  rounded-xl"
             />
             {errors.fullName && <p className="text-red-500">{errors.fullName}</p>}
@@ -269,7 +269,7 @@ function EditProfile() {
               id="email"
               name="email"
               value={formData.email}
-              onChange={handleChange}
+              // onChange={handleChange}
               className="w-full p-2 border-2 border-black  bg-white   text-black  rounded-xl"
             />
             {errors.email && <p className="text-red-500">{errors.email}</p>}

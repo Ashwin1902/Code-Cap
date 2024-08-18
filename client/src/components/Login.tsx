@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from './ui/use-toast';
+import { login } from '../auth/auth.ts';
 
 interface FormState {
   Username: string;
@@ -8,6 +9,8 @@ interface FormState {
 }
 
 const LoginForm: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const [formState, setFormState] = useState<FormState>({
     Username: '',
     Password: '',
@@ -39,7 +42,7 @@ const LoginForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validate()) { return; }
-
+    setIsLoading(true);
     try {
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/signIn`, {
         method: 'POST',
@@ -51,6 +54,12 @@ const LoginForm: React.FC = () => {
       });
 
       if (response.ok) {
+
+        const data= await response.json();
+        if(data.token){
+          login(data.token);
+        }
+
         setMessage('Login successful');
         toast({
           title: "Logged In Successfully",
@@ -71,7 +80,10 @@ const LoginForm: React.FC = () => {
         title: "Error",
         description: 'Login failed: Network error',
       });
+    }finally {
+      setIsLoading(false);
     }
+
     if (message) {
       // Call the toast function correctly
       toast({
@@ -134,11 +146,13 @@ const LoginForm: React.FC = () => {
                 {errors.Password && <p className="text-red-500 text-sm">{errors.Password}</p>}
               </div>
               <button
-                type="submit"
-                className="w-full md:w-1/2 md:ml-28 px-4 py-3 text-white bg-black rounded-full focus:bg-indigo-600 focus:outline-none"
-              >
-                Login
-              </button>
+  type="submit"
+  disabled={isLoading}
+  className="w-full  md:mx-auto lg:mx-auto px-4 py-3 text-white bg-black rounded-full focus:bg-indigo-600 focus:outline-none disabled:opacity-50"
+>
+  {isLoading ? 'Logging in...' : 'Login'}
+</button>
+
             </div>
             <p className="mt-4 text-lg text-center text-gray-400">
               Not registered? <a href="/register" className="text-blue-500 bg-white p-2 rounded-xl border border-gray-500 focus:underline">Register</a>

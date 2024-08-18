@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { signup } from '@/auth/auth';
+import { useToast } from './ui/use-toast';
 interface FormState {
   Name: string;
   Email: string;
@@ -15,7 +16,7 @@ const SignupForm: React.FC = () => {
     Username: '',
     Password: '',
   });
-
+  const {toast} = useToast();
   const [errors, setErrors] = useState<Partial<FormState>>({});
   const [message, setMessage] = useState<string>('');
   const navigate = useNavigate();
@@ -58,9 +59,23 @@ const SignupForm: React.FC = () => {
       });
 
       if (response.ok) {
+        const data= await response.json();
+        if(data.token){
+          signup(data.token);
+        }
+
         setMessage('Registration successful');
+
+        toast({
+          title: "Registration Successful ",
+          description: message,
+        });
+  
         setFormState({ Name: '', Email: '', Username: '', Password: '' });
-        navigate('/'); // Redirect to home page
+        setTimeout(() => {
+          navigate('/Home'); // Redirect to home page
+        }, 2000);
+        
       } else {
         const errorData = await response.json();
         setMessage(`Registration failed: ${errorData.message}`);
@@ -163,6 +178,3 @@ const SignupForm: React.FC = () => {
 };
 
 export default SignupForm;
-
-
-

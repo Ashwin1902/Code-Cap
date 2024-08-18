@@ -1,16 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Register from './Register';
-import Home from './Home';
 import FindTeamMates from './components/FindTeamMates';
-import About from './About';
 import Navbar from './components/Navbar';
+import MainPage from './components/MainPage';
 import Footer from './components/Footer';
 import EditProfile from './components/Editprofile';
 import Hackathons from './components/Hackathons';
 import { Toaster } from './components/ui/toaster';
-// import AdminPage from './components/AdminPage';
-import Login from './Login';
+
+import ProtectedRoute from './components/ProtectedRoute';
+import LoginForm from './components/Login';
+import SignupForm from './components/Signup';
+import AboutUs from './components/AboutUs';
 
 const App: React.FC = () => {
     return (
@@ -36,14 +37,16 @@ const Layout: React.FC = () => {
             {showNavbar && <Navbar />}
             <main className="flex-grow">
                 <Routes>
-                    <Route path="/" element={<Login/>} />
-                    <Route path="/Home" element={<Home/>} />
+                    <Route path="/" element={<LoginForm/>} />
+                    <Route path="/register" element={<SignupForm />} />
+                    <Route path="/about" element={<AboutUs />} />
                     {/* <Route path="/admin" element={<AdminPage />} /> */}
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/buildteam" element={<FindTeamMates />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/edit-profile" element={<EditProfile />} />
-                    <Route path="/hackathons" element={<Hackathons />} />
+                    <Route element={<ProtectedRoute />}>
+                        <Route path="/Home" element={<MainPage/>} />
+                        <Route path="/buildteam" element={<FindTeamMates />} />
+                        <Route path="/edit-profile" element={<EditProfile />} />
+                        <Route path="/hackathons" element={<Hackathons />} />
+                    </Route>
                 </Routes>
             </main>
             <Toaster />
