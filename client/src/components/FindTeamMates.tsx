@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import CheckIcon from "@mui/icons-material/Check";
 import Profile from "./Profile";
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Profile2 from "./Profile2";
 import {
   Accordion,
@@ -31,6 +30,9 @@ const FindTeamMates: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState<Record<string, string>>({});
   const [customCollege, setCustomCollege] = useState("");
   const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [currentPage, setCurrentPage] = useState(1); // Add state for current page
+  const profilesPerPage = 2; // Define how many profiles you want per page
+
   const filterRef = useRef<HTMLDivElement>(null);
 
   const options = ["Gender", "Year", "College", "Branch", "Status"];
@@ -43,7 +45,6 @@ const FindTeamMates: React.FC = () => {
   };
 
   useEffect(() => {
-    // Fetch default profiles when the component mounts
     const fetchDefaultProfiles = async () => {
       try {
         const response = await fetch("http://localhost:3018/api/user/findUsers", {
@@ -127,6 +128,21 @@ const FindTeamMates: React.FC = () => {
     setSelectedFilters({});
     setCustomCollege("");
     setSelectedOption(null);
+  };
+
+  const totalPages = Math.ceil(profiles.length / profilesPerPage);
+  const displayedProfiles = profiles.slice((currentPage - 1) * profilesPerPage, currentPage * profilesPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   return (
@@ -260,7 +276,7 @@ const FindTeamMates: React.FC = () => {
 
       <div className="w-full h-[75%] bg-black px-2 md:px-8 overflow-auto">
         <Accordion type="single" collapsible className="w-full">
-          {profiles.map((profile, index) => (
+          {displayedProfiles.map((profile, index) => (
             <AccordionItem key={index} value={`item-${index + 1}`}>
               <AccordionTrigger>
                 <Profile
@@ -271,7 +287,6 @@ const FindTeamMates: React.FC = () => {
                   imageSrc={profile.Github}
                   linkedIn={profile.LinkedIn}
                 />
-             
               </AccordionTrigger>
               <AccordionContent>
                 <Profile2
@@ -285,12 +300,31 @@ const FindTeamMates: React.FC = () => {
               <br />
             </AccordionItem>
           ))}
-          
         </Accordion>
-        
       </div>
-      
+
+      <div className="w-full flex justify-between items-center mt-4 text-white">
+        <button
+          onClick={handlePreviousPage}
+          disabled={currentPage === 1}
+          className="bg-gray-700 py-2 px-4 rounded disabled:opacity-50"
+        >
+          Previous
+        </button>
+        <div>
+          Page {currentPage} of {totalPages}
+        </div>
+        <button
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+          className="bg-gray-700 py-2 px-4 rounded disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
     </div>
+      
+    
   );
 };
 
