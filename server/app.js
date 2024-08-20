@@ -2,34 +2,33 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const cookieParser = require('cookie-parser');
-require('dotenv').config()
-// const mongoose = require('mongoose');
+require('dotenv').config();
 
 const userRouter = require('./routes/userRouter');
 const eventRouter = require('./routes/eventRouter');
 
+// Define allowed origins
+const allowedOrigins = ['https://code-cap-azure.vercel.app', 'https://another-allowed-origin.com']; // Add other origins as needed
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin) {
-            return callback(null, true);
-        }
-        if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes('*')) {
+        if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
             return callback(null, true);
         }
         const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
         return callback(new Error(msg), false);
     },
-    methods: ['GET', 'POST'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Include methods as needed
     credentials: true, // Allow credentials (cookies)
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-app.use(express.json())
+app.use(express.json());
 app.use(cookieParser());
-app.get('/', (req, res) => res.json({ message: 'API is running' }))
-app.use(express.urlencoded({ extended: true }))
-app.use('/api/user', userRouter)
-app.use('/api/events', eventRouter)
+app.use(express.urlencoded({ extended: true }));
 
-module.exports = app
+app.get('/', (req, res) => res.json({ message: 'API is running' }));
+app.use('/api/user', userRouter);
+app.use('/api/events', eventRouter);
+
+module.exports = app;
