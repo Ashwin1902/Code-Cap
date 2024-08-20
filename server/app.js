@@ -18,6 +18,7 @@ app.use(cors({
 
 app.use(express.json())
 app.use(cookieParser());
+app.use('/',(req,res)=>res.json({message:'API is running'}))
 app.use(express.urlencoded({extended:true}))
 app.use('/api/user',userRouter)
 app.use('/api/events',eventRouter)
