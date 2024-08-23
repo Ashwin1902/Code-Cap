@@ -64,6 +64,8 @@ exports.editProfile=async(req,res)=>{
 
 exports.signUp=async(req,res)=>{
     try {
+      console.log("sign up");
+      
         const {Username,Password,Email,Name}=req.body;
 
         bcrypt.genSalt(10,(err,salt)=>{
