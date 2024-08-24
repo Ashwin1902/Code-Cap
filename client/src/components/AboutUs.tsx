@@ -7,7 +7,7 @@ const teamMembers = [
     name: "Kartik Singh",
     title: "Founder & UI/UX Designer",
     description:
-      "I serve as the frontend developer and project manager for this initiative. My passion for technology drives my desire to create seamless user experiences. I oversee the development process and ensure that our projects are executed efficiently and effectively.",
+     "I am the originator of the idea behind our platform. With the support of my capable team, I transformed this vision into reality. I designed the UI/UX of the website to ensure an intuitive and seamless user experience",
     image: "/ks.jpg",
     linkedin: "https://in.linkedin.com/in/kartik-singh19",
     github: "https://github.com/PROBOTTHACK",
@@ -17,7 +17,8 @@ const teamMembers = [
     name: "Abhinav Gupta",
     title: "Frontend Developer & Project Manager",
     description:
-    "I am the originator of the idea behind our platform. With the support of my capable team, I transformed this vision into reality. I designed the UI/UX of the website to ensure an intuitive and seamless user experience",
+    "I serve as the frontend developer and project manager for this initiative. My passion for technology drives my desire to create seamless user experiences. I oversee the development process and ensure that our projects are executed efficiently and effectively."
+    ,
     image: "/ag.png",
     linkedin: "https://www.linkedin.com/in/abhinav-gupta-b3317128a/",
     github: "https://github.com/abhinav2805-ux",
@@ -28,7 +29,7 @@ const teamMembers = [
     title: "Backend Developer",
     description:
       "I am the backend developer for this project. I focus on creating a robust and scalable infrastructure to support our applications. My goal is to ensure that our backend systems are efficient and reliable.",
-    image: "/Ellipse 22.svg",
+    image: "/as.jpg",
     linkedin: "https://www.linkedin.com/in/ashwin-bansal-5b5a70257/",
     github: "https://github.com/Ashwin1902",
     email: "ashwinbansal19feb@gmail.com",
