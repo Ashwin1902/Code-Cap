@@ -1,4 +1,4 @@
-import { LinkedIn, GitHub, Twitter,Facebook } from '@mui/icons-material';
+import { LinkedIn, GitHub, Twitter } from '@mui/icons-material';
 
 
 const Footer = () => {
@@ -34,16 +34,13 @@ const Footer = () => {
           <div>
             <h3 className="text-white text-lg sm:text-xl font-semibold mb-4">Follow Us</h3>
             <div className="flex space-x-4 sm:space-x-6">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
-<Facebook fontSize="large" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
+              <a href="https://github.com/codecapcommunity/Code-Cap" className="text-gray-400 hover:text-white transition-colors duration-300">
 <Twitter fontSize="large" />
               </a>
-              <a href="https://github.com/codecapcommunity" className="text-gray-400 hover:text-white transition-colors duration-300">
+              <a href="https://github.com/codecapcommunity/Code-Cap" className="text-gray-400 hover:text-white transition-colors duration-300">
 <GitHub fontSize="large" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
+              <a href="https://github.com/codecapcommunity/Code-Cap" className="text-gray-400 hover:text-white transition-colors duration-300">
 <LinkedIn fontSize="large" />
               </a>
             </div>
