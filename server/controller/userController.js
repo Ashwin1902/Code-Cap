@@ -109,7 +109,7 @@ exports.signUp=async(req,res)=>{
                       res.cookie('token', token, {
                         httpOnly: true,
                         secure: true,
-                        sameSite: 'Lax',
+                        sameSite: 'None',
                         maxAge: 3600000, // 1 hour
                       });
                     //   res.cookie('user', Username, {
@@ -160,7 +160,7 @@ exports.signIn=async (req, res) => {
           res.cookie('token', token, {
             httpOnly: true,
             secure: true,
-            sameSite: 'Lax',
+            sameSite: 'None',
             maxAge: 3600000, // 1 hour
           });
         //   res.cookie('user', Username, {
