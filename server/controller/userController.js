@@ -104,8 +104,8 @@ exports.signUp=async(req,res)=>{
                       });
                       res.cookie('user', Username, {
                      //   httpOnly: true,
-                        secure: true,
-                       sameSite: 'None',
+                     //   secure: true,
+                      // sameSite: 'None',
                         maxAge: 3600000, // 1 hour
                       });
                       return res.status(200).json({ token, user:createdUser.Username });
@@ -155,8 +155,8 @@ exports.signIn=async (req, res) => {
           });
           res.cookie('user', Username, {
          //   httpOnly: true,
-            secure: true,
-            sameSite: 'None',
+          //  secure: true,
+           // sameSite: 'None',
             maxAge: 3600000, // 1 hour
           });
           //console.log(user.Username);
@@ -178,8 +178,8 @@ exports.signIn=async (req, res) => {
     });
     res.clearCookie('user', {
     //  httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'Strict',
+   //   secure: process.env.NODE_ENV === 'production',
+    //  sameSite: 'Strict',
   });
     return res.status(200).json({ msg: 'Successfully logged out' });
     } catch (error) {
