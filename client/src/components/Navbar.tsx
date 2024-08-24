@@ -115,7 +115,8 @@ const Navbar: React.FC = () => {
     <>
       <nav className="bg-black text-white flex justify-between items-center p-4">
         <div className="text-2xl font-bold text-yellow-500">
-          <img src="/logoofnavbar.jpg" className="w-[150px] md:w-[250px]" alt="LOGO" />
+         <a href='/Home' target='parent'>
+          <img src="/logoofnavbar.jpg" className="w-[150px] md:w-[250px]" alt="LOGO" /></a>
         </div>
 
         <div className="hidden mr-44 md:flex space-x-8">
