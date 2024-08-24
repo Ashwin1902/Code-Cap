@@ -190,7 +190,7 @@ const FindTeamMates: React.FC = () => {
           </div>
           <div className="h-full w-[20%] md:w-[10%] flex justify-center items-center">
             <button
-              className="bg-green-600 py-[6px] w-full h-full text-lg md:text-2xl font-semibold px-3 text-white rounded"
+              className="bg-green-600 py-[6px] w-full h-full text-md md:text-2xl font-semibold px-3 text-white rounded"
               onClick={handleSearch}
             >
               Search
@@ -198,7 +198,7 @@ const FindTeamMates: React.FC = () => {
           </div>
           <div className="h-full w-[20%]  md:w-[10%]  flex justify-center items-center relative">
             <button
-              className="bg-white py-[6px] w-full h-full text-lg md:text-2xl font-semibold px-3 text-black "
+              className="bg-white py-[6px] w-full h-full text-md md:text-2xl font-semibold px-3 text-black "
               onClick={() => setShowOptions(!showOptions)}
             >
               Filter
