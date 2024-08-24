@@ -99,13 +99,13 @@ exports.signUp=async(req,res)=>{
                       res.cookie('token', token, {
                         httpOnly: true,
                         secure: true,
-                        sameSite: 'None',
+                        sameSite: 'Lax',
                         maxAge: 3600000, // 1 hour
                       });
                       res.cookie('user', Username, {
                      //   httpOnly: true,
-                     //   secure: true,
-                      // sameSite: 'None',
+                        secure: true,
+                       sameSite: 'None',
                         maxAge: 3600000, // 1 hour
                       });
                       return res.status(200).json({ token, user:createdUser.Username });
@@ -150,13 +150,13 @@ exports.signIn=async (req, res) => {
           res.cookie('token', token, {
             httpOnly: true,
             secure: true,
-            sameSite: 'None',
+            sameSite: 'Lax',
             maxAge: 3600000, // 1 hour
           });
           res.cookie('user', Username, {
          //   httpOnly: true,
-          //  secure: true,
-           // sameSite: 'None',
+            secure: true,
+            sameSite: 'None',
             maxAge: 3600000, // 1 hour
           });
           //console.log(user.Username);
