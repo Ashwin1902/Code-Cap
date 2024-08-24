@@ -2,17 +2,17 @@ function HeroSection() {
     return (
       <>
         <div className="w-full md:flex p-6 md:p-12 bg-black">
-          <div className="w-full md:w-[50%] h-[300px] md:h-[500px] p-4 md:p-8 md:px-24 bg-fixed bg-cover bg-center rounded-2xl border-2" style={{ backgroundImage: "url(' backgroung.jpg')" }}>
-            <div className="w-full h-[55%] text-white text-2xl md:text-5xl font-extrabold tracking-wider leading-normal ">
-              WANT TO BUILD <br /> A HACKATHON <br /> TEAM ?
-            </div>
-            <div className="w-full flex text-xl md:text-3xl text-yellow-400 font-bold items-center h-[17%]">
-              WE GOT YOU :)
-            </div>
-            <div className="w-full h-[28%] flex text-lg md:text-xl text-gray-300 items-center">
-              A platform where you can find suitable teammates in your college with specific skillsets and make your hackathon journey smooth.
-            </div>
-          </div>
+         <div className="w-full md:w-[50%] h-auto md:h-[500px] p-4 md:p-8 md:px-24 bg-fixed bg-cover bg-center rounded-2xl border-2 space-y-2 md:space-y-4" style={{ backgroundImage: "url('backgroung.jpg')" }}>
+  <div className="w-full h-auto md:h-[55%] text-white text-xl sm:text-2xl md:text-5xl font-extrabold tracking-wider leading-snug sm:leading-normal">
+    WANT TO BUILD <br /> A HACKATHON <br /> TEAM?
+  </div>
+  <div className="w-full flex text-lg sm:text-xl md:text-3xl text-yellow-400 font-bold items-center h-auto md:h-[17%]">
+    WE GOT YOU :)
+  </div>
+  <div className="w-full h-auto md:h-[28%] flex text-sm sm:text-lg md:text-xl text-gray-300 items-center">
+    A platform where you can find suitable teammates in your college with specific skillsets and make your hackathon journey smooth.
+  </div>
+</div>
           
           
           
