@@ -67,6 +67,8 @@ function EditProfile() {
 
   useEffect(() => {
     const username = getCookieValue('user');
+    console.log(username);
+    
     fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/getProfile/${username}`, {
       credentials: 'include',
     })

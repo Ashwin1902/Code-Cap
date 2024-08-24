@@ -6,6 +6,9 @@ require('dotenv').config()
 
 exports.getProfile=async(req,res)=>{
     try {
+      console.log("get proflie");
+      console.log(req.params);
+      
         const usern=req.params.username
         const user=await userModel.find({Username:usern})
         if(!user){
@@ -95,14 +98,14 @@ exports.signUp=async(req,res)=>{
                       if (err) throw err;
                       res.cookie('token', token, {
                         httpOnly: true,
-                        secure: process.env.NODE_ENV === 'production',
+                        secure: true,
                         sameSite: 'None',
                         maxAge: 3600000, // 1 hour
                       });
                       res.cookie('user', Username, {
-                        httpOnly: true,
-                        secure: process.env.NODE_ENV === 'production',
-                        sameSite: 'None',
+                     //   httpOnly: true,
+                        secure: true,
+                       sameSite: 'None',
                         maxAge: 3600000, // 1 hour
                       });
                       return res.status(200).json({ token, user:createdUser.Username });
@@ -146,13 +149,13 @@ exports.signIn=async (req, res) => {
           
           res.cookie('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
+            secure: true,
             sameSite: 'None',
             maxAge: 3600000, // 1 hour
           });
           res.cookie('user', Username, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
+         //   httpOnly: true,
+            secure: true,
             sameSite: 'None',
             maxAge: 3600000, // 1 hour
           });
