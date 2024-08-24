@@ -60,8 +60,8 @@ const SignupForm: React.FC = () => {
 
       if (response.ok) {
         const data= await response.json();
-        if(data.token){
-          signup(data.token);
+        if(data.username){
+          signup(data.username);
         }
 
         setMessage('Registration successful');

@@ -4,7 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button } from '@mui/material';
 import { useToast } from './ui/use-toast';
 import { AvatarFallback, AvatarImage, Avatar } from './ui/avatar';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { logout } from '../auth/auth';
 
 interface FormData {
@@ -17,6 +17,7 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [formData, setFormData] = useState<FormData>({
     github: '',
@@ -27,7 +28,8 @@ const Navbar: React.FC = () => {
   const defaultAvatarUrl = ''; // Replace with your actual default avatar URL
 
   useEffect(() => {
-    const username = getCookieValue('user');
+    const username = sessionStorage.getItem('username');
+    console.log(username);
     fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/getProfile/${username}`, {
       credentials: 'include'
     })
@@ -43,16 +45,16 @@ const Navbar: React.FC = () => {
       });
   }, []);
 
-  function getCookieValue(name: string) {
-    const cookies = document.cookie.split('; ');
-    for (const cookie of cookies) {
-      const [cookieName, cookieValue] = cookie.split('=');
-      if (cookieName === name) {
-        return decodeURIComponent(cookieValue);
-      }
-    }
-    return null;
-  }
+  // function getCookieValue(name: string) {
+  //   const cookies = document.cookie.split('; ');
+  //   for (const cookie of cookies) {
+  //     const [cookieName, cookieValue] = cookie.split('=');
+  //     if (cookieName === name) {
+  //       return decodeURIComponent(cookieValue);
+  //     }
+  //   }
+  //   return null;
+  // }
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -98,6 +100,17 @@ const Navbar: React.FC = () => {
     ? `https://avatars.githubusercontent.com/${formData.github}`
     : defaultAvatarUrl;
 
+  // Function to determine if a link is active
+  const isActive = (path: string) => {
+    if (path === '/Home' && (location.pathname === '/' || location.pathname === '/Home')) return true;
+    return location.pathname === path;
+  };
+
+  // Function to get link color
+  const getLinkColor = (path: string) => {
+    return isActive(path) ? 'text-yellow-500' : 'text-white hover:text-yellow-500';
+  };
+
   return (
     <>
       <nav className="bg-black text-white flex justify-between items-center p-4">
@@ -106,10 +119,10 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className="hidden mr-44 md:flex space-x-8">
-          <a href="/Home" className="text-yellow-500 text-2xl font-medium">HOME</a>
-          <a href="/buildteam" className="hover:text-yellow-500 text-2xl font-medium">TEAM</a>
-          <a href="/hackathons" className="hover:text-yellow-500 text-2xl font-medium">HACKATHONS</a>
-          <a href="/about" className="hover:text-yellow-500 text-2xl font-medium">ABOUT</a>
+          <a href="/Home" className={`${getLinkColor('/Home')} text-2xl font-medium`}>HOME</a>
+          <a href="/buildteam" className={`${getLinkColor('/buildteam')} text-2xl font-medium`}>TEAM</a>
+          <a href="/hackathons" className={`${getLinkColor('/hackathons')} text-2xl font-medium`}>HACKATHONS</a>
+          <a href="/about" className={`${getLinkColor('/about')} text-2xl font-medium`}>ABOUT</a>
         </div>
 
         <div className="hidden md:flex justify-end items-center w-[10%] h-full">
@@ -152,10 +165,10 @@ const Navbar: React.FC = () => {
 
       <div className={`fixed top-0 left-0 w-64 h-full bg-black transition-transform transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} z-50`}>
         <div className="flex flex-col items-center space-y-8 mt-20">
-          <a href="/Home" className="text-yellow-500 text-xl font-medium" onClick={closeSidebar}>HOME</a>
-          <a href="/buildteam" className="text-white text-xl font-medium hover:text-yellow-500" onClick={closeSidebar}>TEAM</a>
-          <a href="/hackathons" className="text-white text-xl font-medium hover:text-yellow-500" onClick={closeSidebar}>HACKATHONS</a>
-          <a href="/about" className="text-white text-xl font-medium hover:text-yellow-500" onClick={closeSidebar}>ABOUT</a>
+          <a href="/Home" className={`${getLinkColor('/Home')} text-xl font-medium`} onClick={closeSidebar}>HOME</a>
+          <a href="/buildteam" className={`${getLinkColor('/buildteam')} text-xl font-medium`} onClick={closeSidebar}>TEAM</a>
+          <a href="/hackathons" className={`${getLinkColor('/hackathons')} text-xl font-medium`} onClick={closeSidebar}>HACKATHONS</a>
+          <a href="/about" className={`${getLinkColor('/about')} text-xl font-medium`} onClick={closeSidebar}>ABOUT</a>
           <a href="/edit-profile" className="text-white text-xl font-medium hover:text-yellow-500" onClick={closeSidebar}>EDIT PROFILE</a>
           <a
             href="/"

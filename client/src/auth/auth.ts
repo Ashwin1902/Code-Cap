@@ -1,18 +1,18 @@
 // auth.ts
 export const checkUserAuthentication = (): boolean => {
-    const token = localStorage.getItem('token');
-    return !!token;
+    const username = sessionStorage.getItem('username');
+    return !!username;
   };
   
-  export const login = (token: string): void => {
-    localStorage.setItem('token', token);
+  export const login = (username: string): void => {
+    sessionStorage.setItem('username', username);
   };
   
-  export const signup = (token: string): void => {
-    localStorage.setItem('token', token);
+  export const signup = (username: string): void => {
+    sessionStorage.setItem('username', username);
   };
 
   export const logout = (): void => {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('username');
     window.location.href = '/';
   };

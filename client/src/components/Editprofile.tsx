@@ -54,19 +54,19 @@ function EditProfile() {
   const { toast } = useToast();
   const [typingTimer, setTypingTimer] = useState<NodeJS.Timeout | null>(null); // For debouncing
 
-  function getCookieValue(name: string) {
-    const cookies = document.cookie.split('; ');
-    for (const cookie of cookies) {
-      const [cookieName, cookieValue] = cookie.split('=');
-      if (cookieName === name) {
-        return decodeURIComponent(cookieValue);
-      }
-    }
-    return null;
-  }
+  // function getCookieValue(name: string) {
+  //   const cookies = document.cookie.split('; ');
+  //   for (const cookie of cookies) {
+  //     const [cookieName, cookieValue] = cookie.split('=');
+  //     if (cookieName === name) {
+  //       return decodeURIComponent(cookieValue);
+  //     }
+  //   }
+  //   return null;
+  // }
 
   useEffect(() => {
-    const username = getCookieValue('user');
+    const username = sessionStorage.getItem('username');
     console.log(username);
     
     fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/getProfile/${username}`, {
@@ -184,7 +184,7 @@ function EditProfile() {
     console.log(userData);
 
     if (validate()) {
-      fetch(`${process.env.VITE_BACKEND_URL}/api/user/editProfile/${formData.username}`, {
+      fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/editProfile/${sessionStorage.getItem('username')}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

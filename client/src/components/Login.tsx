@@ -56,8 +56,8 @@ const LoginForm: React.FC = () => {
       if (response.ok) {
 
         const data= await response.json();
-        if(data.token){
-          login(data.token);
+        if(data.username){
+          login(data.username);
         }
 
         setMessage('Login successful');

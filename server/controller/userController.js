@@ -75,6 +75,16 @@ exports.signUp=async(req,res)=>{
            // console.log(salt);
            bcrypt.hash(Password,salt,async (err,hash)=>{
               //  console.log(hash);
+              const existingUser = await userModel.findOne({ $or: [{ Username }, { Email }] });
+
+              if (existingUser) {
+                if (existingUser.Username === Username) {
+                  return res.status(400).json({ message: "Username is already taken" });
+                }
+                if (existingUser.Email === Email) {
+                  return res.status(400).json({ message: "Email is already registered" });
+                }
+              }
               let createdUser
                 try {
                     createdUser=await userModel.create({
@@ -85,7 +95,7 @@ exports.signUp=async(req,res)=>{
                 })
                 } catch (error) {
                   console.log(error);
-                  return res.status(500).json({"msg":"Error"})
+                  return res.status(500).json({message:"sign up failed, please try again later"})
                 }
                
                 const uid=createdUser._id;
@@ -102,13 +112,13 @@ exports.signUp=async(req,res)=>{
                         sameSite: 'Lax',
                         maxAge: 3600000, // 1 hour
                       });
-                      res.cookie('user', Username, {
-                     //   httpOnly: true,
-                        secure: true,
-                       sameSite: 'None',
-                        maxAge: 3600000, // 1 hour
-                      });
-                      return res.status(200).json({ token, user:createdUser.Username });
+                    //   res.cookie('user', Username, {
+                    //  //   httpOnly: true,
+                    //     secure: true,
+                    //    sameSite: 'None',
+                    //     maxAge: 3600000, // 1 hour
+                    //   });
+                      return res.status(200).json({username:createdUser.Username });
                     }
                 );
                 
@@ -153,14 +163,14 @@ exports.signIn=async (req, res) => {
             sameSite: 'Lax',
             maxAge: 3600000, // 1 hour
           });
-          res.cookie('user', Username, {
-         //   httpOnly: true,
-            secure: true,
-            sameSite: 'None',
-            maxAge: 3600000, // 1 hour
-          });
+        //   res.cookie('user', Username, {
+        //  //   httpOnly: true,
+        //     secure: true,
+        //     sameSite: 'None',
+        //     maxAge: 3600000, // 1 hour
+        //   });
           //console.log(user.Username);
-          return res.status(200).json({ token, username:user.Username});
+          return res.status(200).json({username:user.Username});
         }
       );
     } catch (err) {
@@ -176,11 +186,11 @@ exports.signIn=async (req, res) => {
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'Strict',
     });
-    res.clearCookie('user', {
-    //  httpOnly: true,
-   //   secure: process.env.NODE_ENV === 'production',
-    //  sameSite: 'Strict',
-  });
+  //   res.clearCookie('user', {
+  //   //  httpOnly: true,
+  //  //   secure: process.env.NODE_ENV === 'production',
+  //   //  sameSite: 'Strict',
+  // });
     return res.status(200).json({ msg: 'Successfully logged out' });
     } catch (error) {
       console.log(error);
