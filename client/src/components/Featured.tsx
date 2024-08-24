@@ -68,7 +68,7 @@ function Featured() {
                   mode={card.Mode}
                   date={card.lastDate}
                   teamSize={card.teamSize}
-                  hackURL={card.hackURL}
+                  hackURL={card.URI}
                   // registrationPrice={card.registrationPrice}
                 />
               </CarouselItem>
