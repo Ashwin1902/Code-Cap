@@ -183,8 +183,8 @@ exports.signIn=async (req, res) => {
     try {
       res.clearCookie('token', {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'Strict',
+        secure: true,
+        sameSite: 'None',
     });
   //   res.clearCookie('user', {
   //   //  httpOnly: true,
