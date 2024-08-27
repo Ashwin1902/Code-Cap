@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signup } from '@/auth/auth';
 import { useToast } from './ui/use-toast';
+import { Eye, EyeOff } from 'lucide-react';
+
 interface FormState {
   Name: string;
   Email: string;
@@ -17,9 +19,15 @@ const SignupForm: React.FC = () => {
     Password: '',
   });
   const {toast} = useToast();
+  const [showPassword, setShowPassword] = useState(false);
+
   const [errors, setErrors] = useState<Partial<FormState>>({});
   const [message, setMessage] = useState<string>('');
   const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const validate = (): boolean => {
     const errors: Partial<FormState> = {};
@@ -133,9 +141,9 @@ const SignupForm: React.FC = () => {
             />
             {errors.Username && <p className="text-red-500 text-sm">{errors.Username}</p>}
           </div>
-          <div className="mb-4">
+          <div className="mb-6 relative">
             <input
-              type="password"
+               type={showPassword ? "text" : "password"}
               id="Password"
               name="Password"
               placeholder="Password"
@@ -143,6 +151,13 @@ const SignupForm: React.FC = () => {
               onChange={handleChange}
               className="w-full bg-gray-200 px-4 py-2 placeholder-gray-500 border-2 border-gray-700 rounded-2xl focus:outline-none focus:border-indigo-500"
             />
+            <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2"
+            >
+                  {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+            </button>
             {errors.Password && <p className="text-red-500 text-sm">{errors.Password}</p>}
           </div>
           <button

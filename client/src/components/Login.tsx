@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from './ui/use-toast';
 import { login } from '../auth/auth.ts';
+import { Eye, EyeOff } from 'lucide-react';
 
 interface FormState {
   Username: string;
@@ -10,6 +11,7 @@ interface FormState {
 
 const LoginForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [formState, setFormState] = useState<FormState>({
     Username: '',
@@ -19,7 +21,6 @@ const LoginForm: React.FC = () => {
   const [message, setMessage] = useState<string>('');
   const navigate = useNavigate();
   
-  // Correctly destructure the toast function
   const { toast } = useToast();
 
   const validate = (): boolean => {
@@ -39,6 +40,10 @@ const LoginForm: React.FC = () => {
     });
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validate()) { return; }
@@ -54,7 +59,6 @@ const LoginForm: React.FC = () => {
       });
 
       if (response.ok) {
-
         const data= await response.json();
         if(data.username){
           login(data.username);
@@ -67,7 +71,7 @@ const LoginForm: React.FC = () => {
         });
   
         setTimeout(() => {
-          navigate('/Home'); // Redirect to home page
+          navigate('/Home');
         }, 2000);
         
       } else {
@@ -80,12 +84,11 @@ const LoginForm: React.FC = () => {
         title: "Error",
         description: 'Login failed: Network error',
       });
-    }finally {
+    } finally {
       setIsLoading(false);
     }
 
     if (message) {
-      // Call the toast function correctly
       toast({
         variant: "destructive",
         title: "Error",
@@ -109,7 +112,6 @@ const LoginForm: React.FC = () => {
       </div>
 
       <div className="flex flex-col w-full max-w-5xl mt-8 md:mt-16">
-        {/* Sign-in Form Section */}
         <div className="p-6 md:p-10 bg-gray-100 rounded-md border-gray-300 relative">
           <div className="text-center mb-8">
             <h1 className="text-4xl md:text-7xl font-bold">
@@ -133,9 +135,9 @@ const LoginForm: React.FC = () => {
                 />
                 {errors.Username && <p className="text-red-500 text-sm">{errors.Username}</p>}
               </div>
-              <div className="mb-6">
+              <div className="mb-6 relative">
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   id="Password"
                   name="Password"
                   placeholder="Password"
@@ -143,6 +145,13 @@ const LoginForm: React.FC = () => {
                   onChange={handleChange}
                   className="w-full bg-gray-100 px-4 py-3 placeholder-gray-500 border-2 border-gray-700 rounded-2xl focus:outline-none focus:border-indigo-500"
                 />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                >
+                  {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+                </button>
                 {errors.Password && <p className="text-red-500 text-sm">{errors.Password}</p>}
               </div>
               <button
