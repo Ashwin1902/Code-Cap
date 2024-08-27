@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AvatarFallback, AvatarImage, Avatar } from './ui/avatar';
 import { useToast } from './ui/use-toast';
+import { Eye, EyeOff } from 'lucide-react';
 
 interface FormData {
   username: string;
@@ -47,7 +49,8 @@ function EditProfile() {
     status: 'available', // Default value
   });
   const defaultAvatarUrl = 'https://github.com/shadcn.png'; // Replace with your default avatar URL
-
+  
+  const [showPassword, setShowPassword] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string>(defaultAvatarUrl);
   const [errors, setErrors] = useState<FormErrors>({});
   const navigate = useNavigate();
@@ -64,6 +67,9 @@ function EditProfile() {
   //   }
   //   return null;
   // }
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   useEffect(() => {
     const username = sessionStorage.getItem('username');
@@ -418,29 +424,43 @@ function EditProfile() {
         </div>
         
         <div className="grid grid-cols-2 gap-4 w-full">
-          <div>
+          <div className='relative'>
             <label htmlFor="password" className="block text-gray-700 font-semibold">Password</label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
               className="w-full p-2 border-2 border-black  bg-white   text-black  rounded-xl"
             />
+            <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 mt-3"
+            >
+                  {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+            </button>
             {errors.password && <p className="text-red-500">{errors.password}</p>}
           </div>
 
-          <div>
+          <div className='relative'>
             <label htmlFor="confirmPassword" className="block text-gray-700 font-semibold">Confirm Password</label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="confirmPassword"
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
               className="w-full p-2 border-2 border-black  bg-white   text-black  rounded-xl"
             />
+            <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 mt-3"
+            >
+                  {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+            </button>
             {errors.confirmPassword && <p className="text-red-500">{errors.confirmPassword}</p>}
           </div>
         </div>
