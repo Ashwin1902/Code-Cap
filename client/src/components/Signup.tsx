@@ -83,7 +83,7 @@ const SignupForm: React.FC = () => {
 
         setFormState({ Name: '', Email: '', Username: '', Password: '', ConfirmPassword: '' });
         setTimeout(() => {
-          navigate('/Home'); // Redirect to home page
+          navigate('/edit-profile'); // Redirect to home page
         }, 2000);
 
       } else {
